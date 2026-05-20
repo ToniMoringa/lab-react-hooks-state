@@ -3,3 +3,14 @@
 /* TODO (optional): Add special styling for out-of-stock products */
 
 /* TODO (optional): Style the add/remove button */
+
+.dark-mode {
+  color: #213547;
+  background-color: #ffffff;
+}
+
+.light-mode {
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+}
+

@@ -1,14 +1,21 @@
-import React from 'react'
+import React from 'react';
+import styles from './Cart.module.css';
 
-const Cart = () => {
+const Cart = ({ cart }) => {
+  const total = cart.reduce((acc, item) => acc + item.price, 0);
+
   return (
-    <div>
+    <div className={styles.cart}>
       <h2>Shopping Cart</h2>
-      <ul>
-        {/* TODO: Include items here in li tags with text 'ITEM.NAME is in your cart.' */}
-      </ul>
+      {cart.map((item) => (
+        <div key={item.id} className={stylesCartItem}>
+          <p>{item.name}</p>
+          <p>${item.price.toFixed(2)}</p>
+        </div>
+      ))}
+      <p>Total: ${total.toFixed(2)}</p>
     </div>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;
