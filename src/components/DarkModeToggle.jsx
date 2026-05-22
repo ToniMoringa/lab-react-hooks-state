@@ -1,16 +1,15 @@
 import React from 'react';
-import styles from './DarkModeToggle.module.css';
 
 const DarkModeToggle = ({ darkMode, setDarkMode }) => {
   return (
     <button
       onClick={() => setDarkMode(!darkMode)}
-      className={styles.toggleButton}
+      aria-label="Toggle dark mode"
+      data-testid="dark-mode-toggle"
     >
-      {darkMode ? 'Toggle Light Mode' : 'Toggle Dark Mode'}
+      {darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
     </button>
   );
 };
 
 export default DarkModeToggle;
-

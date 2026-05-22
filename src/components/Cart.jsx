@@ -1,19 +1,36 @@
 import React from 'react';
-import styles from './Cart.module.css';
 
 const Cart = ({ cart }) => {
-  const total = cart.reduce((acc, item) => acc + item.price, 0);
+  const getTotal = () => {
+    return cart.reduce((acc, item) => {
+      const price = typeof item.price === 'number' 
+        ? item.price 
+        : parseFloat(String(item.price).replace('$', ''));
+      return acc + price;
+    }, 0);
+  };
 
   return (
-    <div className={styles.cart}>
+    <div className="cart" data-testid="cart">
       <h2>Shopping Cart</h2>
-      {cart.map((item) => (
-        <div key={item.id} className={stylesCartItem}>
-          <p>{item.name}</p>
-          <p>${item.price.toFixed(2)}</p>
-        </div>
-      ))}
-      <p>Total: ${total.toFixed(2)}</p>
+      
+      {cart.length === 0 ? (
+        <p data-testid="empty-cart">Your cart is empty</p>
+      ) : (
+        <ul data-testid="cart-items">
+          {cart.map((item, index) => (
+            <li key={index} data-testid="cart-item">
+              <p data-testid="cart-message">{item.name} is in your cart</p>
+              <p data-testid="cart-price">
+                ${typeof item.price === 'number' ? item.price.toFixed(2) : item.price}
+              </p>
+            </li>
+          ))}
+          <p className="total" data-testid="cart-total">
+            Total: ${getTotal().toFixed(2)}
+          </p>
+        </ul>
+      )}
     </div>
   );
 };

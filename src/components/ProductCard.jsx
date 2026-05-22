@@ -1,18 +1,22 @@
 import React from 'react';
-import styles from '../styles/ProductCard.module.css';
 
-const ProductCard = ({ product, addToCart }) => {
+const ProductCard = ({ product, onAddToCart }) => {
   return (
-    <div
-      className={`${styles.card} ${!product.inStock ? styles.outOfStock : ''}`}
+    <div 
+      className="product-card" 
+      data-testid={`product-${product.name.toLowerCase()}`}
     >
-      <h3>{product.name}</h3>
-      <p>Price: {product.price}</p>
-      <p>Status: {product.inStock ? 'In Stock' : 'Out of Stock'}</p>
-
+      <h3 data-testid="product-name">{product.name}</h3>
+      <p className="category" data-testid="product-category">{product.category}</p>
+      <p className="price" data-testid="product-price">${product.price.toFixed(2)}</p>
+      <p className="stock" data-testid="product-stock">
+        {product.inStock ? 'In Stock' : 'Out of Stock'}
+      </p>
       <button
-        onClick={() => addToCart(product)}
-        data-testid={'product-' + product.id}
+        onClick={() => onAddToCart(product)}
+        disabled={!product.inStock}
+        className="add-button"
+        data-testid="add-to-cart-btn"
       >
         Add to Cart
       </button>
