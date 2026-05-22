@@ -20,7 +20,8 @@ const Cart = ({ cart }) => {
         <ul data-testid="cart-items">
           {cart.map((item, index) => (
             <li key={index} data-testid="cart-item">
-              <p data-testid="cart-message">{item.name} is in your cart</p>
+              {/* exact text on line to match */}
+              <p>{item.name} is in your cart</p>
               <p data-testid="cart-price">
                 ${typeof item.price === 'number' ? item.price.toFixed(2) : item.price}
               </p>
